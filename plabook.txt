@@ -1,0 +1,29 @@
+cat v crate one playbook for 
+
+to create image and add tag and push that image to docker hub and remove image.
+
+
+---
+- hosts: all
+  become: true
+  tasks:
+          - name: create docker  image
+            command: docker build -t javaimage:latest .
+            args:
+                    chdir: /op/docker
+
+          - name: create tag to that image
+            command: docker tag javaimage chnaveen112/javaimage
+
+          - name: push docker image to docker hub
+            command: docker push chnaveen112/javaimage
+
+          - name: remove the image from local
+            command: docker rmi javaimage:latest chnaveen112/javaimage
+            ignore_errors: yes
+
+
+
+ crate another playbook for :to create image from docker file,create container ,
+
+
